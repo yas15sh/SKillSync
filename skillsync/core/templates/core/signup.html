@@ -31,9 +31,14 @@
                     <label for="skills">Skills: Django, UI Design, Payments</label>
                 </div>
             {% endif %}
-            <div class="form-floating mb-4">
-                <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
-                <label for="password">Password</label>
+            <div class="password-field mb-4">
+                <div class="form-floating">
+                    <input class="form-control" type="password" name="password" id="password" placeholder="Password" required data-password-input>
+                    <label for="password">Password</label>
+                </div>
+                <button class="password-toggle" type="button" data-password-toggle aria-label="Show password">
+                    <i class="bi bi-eye"></i>
+                </button>
             </div>
             <button class="btn btn-primary w-100 btn-lg" type="submit">
                 <i class="bi bi-person-plus"></i> Create account

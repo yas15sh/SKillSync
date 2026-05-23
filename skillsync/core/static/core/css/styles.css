@@ -1,14 +1,14 @@
 :root {
-    --bg: #f6f7fb;
+    --bg: #f7f8fc;
     --surface: rgba(255, 255, 255, 0.82);
     --surface-solid: #ffffff;
     --surface-muted: #eef3f8;
     --text: #18202f;
     --muted: #667085;
     --border: rgba(24, 32, 47, 0.1);
-    --primary: #2563eb;
-    --primary-dark: #1d4ed8;
-    --teal: #00a991;
+    --primary: #3157d5;
+    --primary-dark: #2444a8;
+    --teal: #0f9f8a;
     --amber: #f59e0b;
     --rose: #e11d48;
     --shadow: 0 18px 48px rgba(24, 32, 47, 0.12);
@@ -49,7 +49,7 @@ body {
         linear-gradient(225deg, rgba(0, 169, 145, 0.1), transparent 32%),
         var(--bg);
     color: var(--text);
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: "Poppins", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     letter-spacing: 0;
 }
 
@@ -111,6 +111,57 @@ a:hover {
     background: var(--rose);
     color: white;
     font-size: 0.75rem;
+}
+
+.profile-menu {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 40px;
+    padding: 0.25rem 0.35rem 0.25rem 0.25rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 750;
+}
+
+.profile-menu-avatar {
+    display: inline-grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, var(--primary), var(--amber));
+    color: white;
+    font-size: 0.82rem;
+}
+
+.profile-menu-name {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.app-dropdown {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface-solid);
+    box-shadow: var(--shadow-soft);
+}
+
+.app-dropdown .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--text);
+    font-weight: 650;
+}
+
+.app-dropdown .dropdown-item:hover {
+    background: var(--surface-muted);
+    color: var(--primary);
 }
 
 .theme-toggle,
@@ -182,15 +233,61 @@ a:hover {
     min-height: calc(100vh - 66px);
     display: flex;
     align-items: center;
-    padding: 4rem 0 3rem;
+    position: relative;
+    overflow: hidden;
+    padding: 4.5rem 0 3.4rem;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    inset: 5% 2% auto auto;
+    width: min(46vw, 640px);
+    height: min(46vw, 640px);
+    border-radius: 48%;
+    background: conic-gradient(from 180deg, rgba(49, 87, 213, 0.16), rgba(15, 159, 138, 0.1), rgba(245, 158, 11, 0.12), rgba(49, 87, 213, 0.16));
+    filter: blur(24px);
+    opacity: 0.75;
+    pointer-events: none;
+}
+
+.hero-section > .container-fluid {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-badge-row .eyebrow {
+    margin-bottom: 0;
+}
+
+.launch-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 30px;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid color-mix(in srgb, var(--amber) 42%, var(--border));
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--amber) 10%, var(--surface-solid));
+    color: var(--text);
+    font-size: 0.78rem;
+    font-weight: 800;
 }
 
 .hero-section h1 {
-    max-width: 620px;
+    max-width: 720px;
     margin: 0;
     color: var(--text);
-    font-size: 4rem;
-    line-height: 1;
+    font-size: clamp(3rem, 6vw, 5.65rem);
+    line-height: 0.98;
     font-weight: 900;
 }
 
@@ -207,6 +304,26 @@ a:hover {
     flex-wrap: wrap;
     gap: 0.9rem;
     margin-top: 2rem;
+}
+
+.hero-trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1rem;
+    margin-top: 1.1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-weight: 750;
+}
+
+.hero-trust span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.hero-trust i {
+    color: var(--teal);
 }
 
 .hero-metrics {
@@ -259,6 +376,16 @@ a:hover {
     padding: 1rem;
 }
 
+.hero-product::after {
+    content: "";
+    position: absolute;
+    inset: auto 1rem 1rem 1rem;
+    height: 46px;
+    border-radius: var(--radius);
+    background: linear-gradient(90deg, rgba(49, 87, 213, 0.12), rgba(15, 159, 138, 0.12), rgba(245, 158, 11, 0.12));
+    pointer-events: none;
+}
+
 [data-theme="dark"] .hero-product {
     background:
         linear-gradient(135deg, rgba(31, 35, 40, 0.96), rgba(31, 35, 40, 0.72)),
@@ -268,6 +395,7 @@ a:hover {
 
 .product-toolbar {
     display: flex;
+    align-items: center;
     gap: 0.5rem;
     padding: 0.7rem;
 }
@@ -277,6 +405,18 @@ a:hover {
     height: 12px;
     border-radius: 50%;
     background: var(--border);
+}
+
+.product-toolbar strong {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 0.86rem;
+}
+
+.product-dashboard {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 1rem;
 }
 
 .product-grid {
@@ -302,6 +442,14 @@ a:hover {
     justify-content: center;
 }
 
+.product-estimate {
+    min-height: 250px;
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
 .product-kicker,
 .product-card span,
 .product-side span {
@@ -314,6 +462,28 @@ a:hover {
     margin: 0.5rem 0 2rem;
     font-size: 2.4rem;
     font-weight: 900;
+}
+
+.product-estimate .product-price {
+    margin-bottom: 1rem;
+}
+
+.estimate-chart {
+    display: flex;
+    align-items: end;
+    gap: 0.55rem;
+    width: 150px;
+    height: 160px;
+    padding: 0.8rem;
+    border-radius: var(--radius);
+    background: var(--surface-muted);
+}
+
+.estimate-chart span {
+    flex: 1;
+    min-width: 18px;
+    border-radius: 999px 999px 4px 4px;
+    background: linear-gradient(180deg, var(--teal), var(--primary));
 }
 
 .product-bars {
@@ -334,6 +504,10 @@ a:hover {
     text-align: center;
 }
 
+.match-panel {
+    min-height: 250px;
+}
+
 .match-ring {
     display: grid;
     width: 92px;
@@ -346,6 +520,11 @@ a:hover {
 
 .section-band {
     padding: 4rem 0;
+}
+
+.section-contrast {
+    border-block: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface-solid) 56%, transparent);
 }
 
 .section-heading {
@@ -368,6 +547,197 @@ a:hover {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
+}
+
+.platform-split {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(420px, 1.2fr);
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.audience-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.audience-card {
+    min-height: 100%;
+    padding: 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow-soft);
+}
+
+.audience-card > i {
+    display: inline-grid;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 1rem;
+    place-items: center;
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--primary) 12%, var(--surface-muted));
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+.audience-card h3 {
+    margin: 0 0 0.55rem;
+    font-weight: 850;
+}
+
+.audience-card p {
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.audience-card a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--primary);
+    font-weight: 850;
+}
+
+.workflow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.workflow-step,
+.testimonial-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow-soft);
+}
+
+.workflow-step {
+    padding: 1.2rem;
+}
+
+.workflow-step span {
+    display: inline-grid;
+    width: 38px;
+    height: 38px;
+    margin-bottom: 1rem;
+    place-items: center;
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--primary) 12%, var(--surface-muted));
+    color: var(--primary);
+    font-weight: 900;
+}
+
+.project-preview-card {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.bid-preview-card {
+    grid-column: 1 / -1;
+}
+
+.mini-progress {
+    height: 9px;
+    margin-top: 0.8rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--surface-muted);
+}
+
+.mini-progress span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--primary), var(--teal));
+}
+
+.workflow-step h3,
+.testimonial-card strong {
+    font-weight: 850;
+}
+
+.workflow-step p,
+.testimonial-card p,
+.app-footer p {
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.testimonial-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.75fr);
+    gap: 1rem;
+    align-items: center;
+}
+
+.testimonial-card {
+    padding: 1.35rem;
+}
+
+.testimonial-card i {
+    color: var(--amber);
+    font-size: 1.6rem;
+}
+
+.app-footer {
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface-solid) 76%, transparent);
+}
+
+.cta-band {
+    padding: 4rem 0;
+}
+
+.cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid color-mix(in srgb, var(--primary) 24%, var(--border));
+    border-radius: var(--radius);
+    background:
+        linear-gradient(135deg, color-mix(in srgb, var(--primary) 12%, var(--surface-solid)), color-mix(in srgb, var(--teal) 10%, var(--surface-solid))),
+        var(--surface-solid);
+    box-shadow: var(--shadow);
+}
+
+.cta-inner h2 {
+    max-width: 760px;
+    margin: 0;
+    font-weight: 900;
+    line-height: 1.12;
+}
+
+.footer-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.footer-grid p {
+    max-width: 560px;
+    margin: 0.8rem 0 0;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+}
+
+.footer-links a {
+    color: var(--muted);
+    font-weight: 750;
 }
 
 .feature-card {
@@ -424,6 +794,34 @@ a:hover {
 .auth-switch a {
     color: var(--primary);
     font-weight: 800;
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-field .form-control {
+    padding-right: 3.2rem;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0.55rem;
+    z-index: 4;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border: 0;
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--muted);
+}
+
+.password-toggle:hover {
+    background: var(--surface-muted);
+    color: var(--primary);
 }
 
 .form-control,
@@ -537,6 +935,29 @@ a:hover {
     align-items: flex-start;
     justify-content: space-between;
     gap: 1rem;
+}
+
+.client-tools {
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) minmax(150px, 190px);
+    gap: 0.65rem;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon i {
+    position: absolute;
+    top: 50%;
+    left: 0.85rem;
+    z-index: 2;
+    color: var(--muted);
+    transform: translateY(-50%);
+}
+
+.input-icon .form-control {
+    padding-left: 2.5rem;
 }
 
 .dashboard-header h1 {
@@ -657,6 +1078,17 @@ a:hover {
     margin: 0.75rem 0 0.45rem;
     font-size: 1.35rem;
     font-weight: 900;
+}
+
+.collapse-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    border: 0;
+    background: transparent;
+    color: var(--primary);
+    font-weight: 800;
 }
 
 .tag-row,
@@ -1047,12 +1479,16 @@ a:hover {
 
 @media (max-width: 1180px) {
     .metric-grid,
-    .feature-grid {
+    .feature-grid,
+    .audience-grid,
+    .workflow-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .dashboard-grid,
-    .detail-layout {
+    .detail-layout,
+    .testimonial-layout,
+    .platform-split {
         grid-template-columns: 1fr;
     }
 
@@ -1092,8 +1528,20 @@ a:hover {
         grid-template-columns: 1fr;
     }
 
+    .product-dashboard {
+        grid-template-columns: 1fr;
+    }
+
     .product-main {
         grid-row: auto;
+    }
+
+    .product-estimate {
+        min-height: auto;
+    }
+
+    .match-panel {
+        min-height: auto;
     }
 
     .project-card-header,
@@ -1101,6 +1549,11 @@ a:hover {
     .section-title-row,
     .panel-heading {
         flex-direction: column;
+    }
+
+    .client-tools {
+        width: 100%;
+        grid-template-columns: 1fr;
     }
 
     .budget-block {
@@ -1139,6 +1592,8 @@ a:hover {
     .hero-metrics,
     .metric-grid,
     .feature-grid,
+    .audience-grid,
+    .workflow-grid,
     .filter-bar {
         grid-template-columns: 1fr;
     }
@@ -1153,6 +1608,21 @@ a:hover {
         width: 100%;
     }
 
+    .product-estimate {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .estimate-chart {
+        width: 100%;
+    }
+
+    .project-preview-card,
+    .cta-inner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
     .sidebar-nav {
         grid-template-columns: 1fr;
     }
@@ -1164,5 +1634,14 @@ a:hover {
 
     .message-bubble {
         max-width: 100%;
+    }
+
+    .footer-grid {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .profile-menu-name {
+        max-width: 120px;
     }
 }

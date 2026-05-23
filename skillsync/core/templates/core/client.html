@@ -87,11 +87,23 @@
                 <span class="eyebrow">Your projects</span>
                 <h2>AI estimates, bids, and recommendations</h2>
             </div>
+            <div class="client-tools">
+                <div class="input-icon">
+                    <i class="bi bi-search"></i>
+                    <input class="form-control" type="search" placeholder="Search projects, skills, status" data-project-search>
+                </div>
+                <select class="form-select" data-project-filter>
+                    <option value="">All statuses</option>
+                    <option value="open">Open</option>
+                    <option value="in progress">In progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
         </div>
 
-        <div class="project-list">
+        <div class="project-list" data-project-list>
             {% for item in project_cards %}
-                <article class="project-card">
+                <article class="project-card" data-project-card data-search-text="{{ item.project.title_or_summary }} {{ item.project.description }} {{ item.project.get_status_display }} {{ item.project.get_complexity_display }} {% for skill in item.project.skills %}{{ skill }} {% endfor %}" data-status="{{ item.project.get_status_display|lower }}">
                     <div class="project-card-header">
                         <div>
                             <div class="tag-row">
@@ -108,56 +120,62 @@
                             <small>{{ item.project.estimated_time_label }}</small>
                         </div>
                     </div>
+                    <button class="collapse-toggle" type="button" data-card-toggle aria-expanded="true">
+                        <i class="bi bi-chevron-up"></i> Details
+                    </button>
 
-                    <div class="skill-row">
-                        {% for skill in item.project.skills %}
-                            <span>{{ skill }}</span>
-                        {% endfor %}
-                    </div>
-
-                    <div class="insight-box">
-                        <i class="bi bi-lightbulb"></i>
-                        <span>{{ item.project.budget_justification }}</span>
-                    </div>
-
-                    <div class="bid-section">
-                        <div>
-                            <h4>Bids</h4>
-                            {% if item.best_bid %}
-                                <div class="best-bid">
-                                    <i class="bi bi-trophy"></i>
-                                    <span>
-                                        Best bid: Rs. {{ item.best_bid.amount }} by
-                                        {{ item.best_bid.freelancer.profile.display_name }}
-                                        ({{ item.best_bid.match_score }}% match)
-                                    </span>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="bid-list">
-                            {% for bid in item.bids|slice:":4" %}
-                                <div class="bid-row">
-                                    <span>{{ bid.freelancer.profile.display_name }}</span>
-                                    <strong>Rs. {{ bid.amount }}</strong>
-                                    <small>{{ bid.match_score }}%</small>
-                                    {% if bid.status == "pending" %}
-                                        <form class="inline-form" method="POST" action="{% url 'accept_bid' bid.id %}">
-                                            {% csrf_token %}
-                                            <button class="btn btn-sm btn-ghost" type="submit">Accept</button>
-                                        </form>
-                                    {% else %}
-                                        <span class="status-pill">{{ bid.get_status_display }}</span>
-                                    {% endif %}
-                                </div>
-                            {% empty %}
-                                <div class="empty-state">No bids yet.</div>
+                    <div data-card-body>
+                        <div class="skill-row">
+                            {% for skill in item.project.skills %}
+                                <span>{{ skill }}</span>
                             {% endfor %}
+                        </div>
+
+                        <div class="insight-box">
+                            <i class="bi bi-lightbulb"></i>
+                            <span>{{ item.project.budget_justification }}</span>
+                        </div>
+
+                        <div class="bid-section">
+                            <div>
+                                <h4>Bids</h4>
+                                {% if item.best_bid %}
+                                    <div class="best-bid">
+                                        <i class="bi bi-trophy"></i>
+                                        <span>
+                                            Best bid: Rs. {{ item.best_bid.amount }} by
+                                            {{ item.best_bid.freelancer.profile.display_name }}
+                                            ({{ item.best_bid.match_score }}% match)
+                                        </span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="bid-list">
+                                {% for bid in item.bids|slice:":4" %}
+                                    <div class="bid-row">
+                                        <span>{{ bid.freelancer.profile.display_name }}</span>
+                                        <strong>Rs. {{ bid.amount }}</strong>
+                                        <small>{{ bid.match_score }}%</small>
+                                        {% if bid.status == "pending" %}
+                                            <form class="inline-form" method="POST" action="{% url 'accept_bid' bid.id %}">
+                                                {% csrf_token %}
+                                                <button class="btn btn-sm btn-ghost" type="submit">Accept</button>
+                                            </form>
+                                        {% else %}
+                                            <span class="status-pill">{{ bid.get_status_display }}</span>
+                                        {% endif %}
+                                    </div>
+                                {% empty %}
+                                    <div class="empty-state">No bids yet.</div>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </article>
             {% empty %}
                 <div class="empty-state large">Post your first project to generate AI estimates and recommendations.</div>
             {% endfor %}
+            <div class="empty-state large d-none" data-project-empty>No projects match your search.</div>
         </div>
     </section>
 </div>
